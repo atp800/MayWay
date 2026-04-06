@@ -7,7 +7,7 @@ export default defineConfig({
   },
   // Add this i18n section!
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'nl',
     locales: ['en', 'nl'],
     routing: {
       prefixDefaultLocale: false, // "false" means default (currently English) URLs don't need /en/
