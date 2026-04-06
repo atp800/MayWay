@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+
+.font-neucha{
+  font-family: 'Neucha', cursive;
+}
+
+.font-caveat {
+  font-family: 'Caveat Brush', cursive;
+}
