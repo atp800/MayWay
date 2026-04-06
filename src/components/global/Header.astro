@@ -55,22 +55,42 @@ const navLinks = [
 
       <!-- Right side icons & Mobile Menu Button -->
       <div class="flex items-center gap-1 sm:gap-2">
-        <!-- Language Toggle (optional, you can add it here if you like) -->
-        <!--
-        <div class="hidden sm:flex text-sm font-medium text-white/80 space-x-2 border-r pr-4 border-white/30 nav-link">
-          <a href="/en" class={lang === 'en' ? 'text-white font-bold' : 'hover:text-white'}>EN</a>
-          <span>|</span>
-          <a href="/nl" class={lang === 'nl' ? 'text-white font-bold' : 'hover:text-white'}>NL</a>
+        
+        <!-- START: Language Selector Dropdown -->
+        <div class="relative hidden sm:flex group">
+          <!-- Globe Icon Trigger -->
+          <div class="p-2 nav-link text-white transition-colors duration-300 cursor-pointer group-hover:text-[#4ED2CE]" aria-haspopup="true" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          </div>
+
+          <!-- Dropdown Panel -->
+          <div class="absolute top-full right-0 pt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5
+                      opacity-0 scale-95 pointer-events-none transform transition-all duration-200 ease-in-out
+                      group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
+                      focus:outline-none"
+               role="menu" aria-orientation="vertical">
+            <div class="py-1" role="none">
+              <a href="/en/" class:list={[
+                  'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100',
+                  { 'font-bold bg-gray-50': lang === 'en' }
+                ]} role="menuitem">
+                English (EN)
+              </a>
+              <a href="/nl/" class:list={[
+                  'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100',
+                  { 'font-bold bg-gray-50': lang === 'nl' }
+                ]} role="menuitem">
+                Nederlands (NL)
+              </a>
+            </div>
+          </div>
         </div>
-        -->
-        <a class="hidden sm:flex p-2 nav-link text-white transition-colors duration-300 hover:text-[#4ED2CE]" aria-label="Language" href={lang === 'en' ? '/nl' : '/en'}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
-        </a>
+        <!-- END: Language Selector Dropdown -->
+
         <a class="hidden sm:flex p-2 nav-link text-white transition-colors duration-300 hover:text-[#4ED2CE]" aria-label="E-guides Shop" href={getRelativeLocaleUrl('/eguides')}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
         </a>
         
-        <!-- Mobile Menu "Hamburger" Button -->
         <button id="open-menu-btn" type="button" class="md:hidden p-2 nav-link text-white transition-colors duration-300 hover:text-[#4ED2CE]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open Menu">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
         </button>
@@ -84,7 +104,7 @@ const navLinks = [
   <!-- This is the container that slides up -->
   <div id="mobile-menu-container" class="absolute inset-0 flex flex-col bg-gradient-to-b from-[#1CABB0] via-[#1ba9ae] to-[#4ED2CE] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] translate-y-full">
     <div class="flex items-center justify-between px-6 pt-6 pb-2">
-      <span class="font-serif italic text-lg text-white/90">Where do you want to go?</span>
+      <!-- <span class="font-serif italic text-lg text-white/90">Where do you want to go?</span> -->
       <button id="close-menu-btn" type="button" class="rounded-full bg-white/15 p-3 text-white backdrop-blur-sm transition-colors hover:bg-white/25" aria-label="Close">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
       </button>
