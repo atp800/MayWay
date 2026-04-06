@@ -1,0 +1,57 @@
+---
+// src/components/global/Header.astro
+import { ui, defaultLang } from '../../i18n/ui';
+
+// 1. Get the current language from the URL (e.g., 'nl' or 'en')
+const lang = Astro.currentLocale || defaultLang;
+
+// 2. Helper function to get translated words from our dictionary
+function t(key: keyof typeof ui[typeof defaultLang]) {
+  return ui[lang as keyof typeof ui][key];
+}
+
+// 3. Helper to generate correct URLs (e.g., adds /nl/ if we are in Dutch)
+function getRelativeLocaleUrl(path: string) {
+  return lang === defaultLang ? path : `/${lang}${path}`;
+}
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- Logo Area -->
+      <div class="flex-shrink-0">
+        <a href={getRelativeLocaleUrl('/')} class="text-2xl font-bold text-gray-900">
+          MayWay.
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (Translated!) -->
+      <nav class="hidden md:flex space-x-8">
+        <a href={getRelativeLocaleUrl('/')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.home')}</a>
+        <a href={getRelativeLocaleUrl('/destinations')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.destinations')}</a>
+        <a href={getRelativeLocaleUrl('/advice')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.advice')}</a>
+        <a href={getRelativeLocaleUrl('/eguides')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.eguides')}</a>
+        <a href={getRelativeLocaleUrl('/about')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.about')}</a>
+        <a href={getRelativeLocaleUrl('/contact')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.contact')}</a>
+      </nav>
+
+      <!-- Buttons: Book Now + Language Toggle -->
+      <div class="hidden md:flex items-center space-x-4">
+        
+        <!-- Language Toggle -->
+        <div class="text-sm font-medium text-gray-500 flex space-x-2 border-r pr-4 border-gray-300">
+          <a href="/en" class={lang === 'en' ? 'text-gray-900 font-bold' : 'hover:text-gray-900'}>EN</a>
+          <span>|</span>
+          <a href="/nl" class={lang === 'nl' ? 'text-gray-900 font-bold' : 'hover:text-gray-900'}>NL</a>
+        </div>
+
+        <a href={getRelativeLocaleUrl('/contact')} class="bg-gray-900 text-white px-5 py-2 rounded-md hover:bg-gray-800 transition">
+          {t('button.book')}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</header>

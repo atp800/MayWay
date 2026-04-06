@@ -1,5 +1,17 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  vite: {
+    plugins: [tailwindcss()]
+  },
+  // Add this i18n section!
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'nl'],
+    routing: {
+      prefixDefaultLocale: true, // "false" means default (currently English) URLs don't need /en/
+      redirectToDefaultLocale: true // If they visit "/", send them to English
+    }
+  }
+});
