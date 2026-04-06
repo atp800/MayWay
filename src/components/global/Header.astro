@@ -2,56 +2,198 @@
 // src/components/global/Header.astro
 import { ui, defaultLang } from '../../i18n/ui';
 
-// 1. Get the current language from the URL (e.g., 'nl' or 'en')
+// Your existing i18n logic - no changes needed here.
 const lang = Astro.currentLocale || defaultLang;
 
-// 2. Helper function to get translated words from our dictionary
 function t(key: keyof typeof ui[typeof defaultLang]) {
   return ui[lang as keyof typeof ui][key];
 }
 
-// 3. Helper to generate correct URLs (e.g., adds /nl/ if we are in Dutch)
 function getRelativeLocaleUrl(path: string) {
-  return lang === defaultLang ? path : `/${lang}${path}`;
+  // We add a trailing slash to base URLs for consistency
+  const basePath = path === '/' ? '/' : `${path}/`;
+  return lang === defaultLang ? basePath : `/${lang}${basePath}`;
 }
+
+// Define your navigation links in one place for easy maintenance (DRY principle)
+const navLinks = [
+  { href: '/', text: t('nav.home') },
+  { href: '/destinations', text: t('nav.destinations') },
+  { href: '/advice', text: t('nav.advice') },
+  { href: '/eguides', text: t('nav.eguides') },
+  { href: '/about', text: t('nav.about') },
+  { href: '/contact', text: t('nav.contact') },
+];
 ---
 
-<header class="bg-white shadow-sm sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
+<!-- 
+  The header element needs an ID for our script to target it.
+  The classes make it fixed, full-width, and apply transitions.
+  It starts transparent. The 'scrolled' class will be added via JS.
+-->
+<header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
       
-      <!-- Logo Area -->
-      <div class="flex-shrink-0">
-        <a href={getRelativeLocaleUrl('/')} class="text-2xl font-bold text-gray-900">
-          MayWay.
-        </a>
-      </div>
+      <!-- Logo: Matches the two-tone style from your old site -->
+      <a href={getRelativeLocaleUrl('/')} class="flex items-baseline gap-2 select-none">
+        <span class="text-2xl font-bold tracking-tight text-[#4ED2CE]">MAYWAY</span>
+        <!-- This span's text color will be controlled by the scroll styles -->
+        <span id="logo-subtitle" class="font-sansserif text-base font-normal tracking-normal text-white/95">
+          travels
+        </span>
+      </a>
 
-      <!-- Desktop Navigation (Translated!) -->
-      <nav class="hidden md:flex space-x-8">
-        <a href={getRelativeLocaleUrl('/')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.home')}</a>
-        <a href={getRelativeLocaleUrl('/destinations')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.destinations')}</a>
-        <a href={getRelativeLocaleUrl('/advice')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.advice')}</a>
-        <a href={getRelativeLocaleUrl('/eguides')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.eguides')}</a>
-        <a href={getRelativeLocaleUrl('/about')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.about')}</a>
-        <a href={getRelativeLocaleUrl('/contact')} class="text-gray-600 hover:text-gray-900 transition">{t('nav.contact')}</a>
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        {navLinks.map(link => (
+          <a href={getRelativeLocaleUrl(link.href)} class="nav-link transition-colors duration-300 text-white hover:text-[#4ED2CE]">
+            {link.text}
+          </a>
+        ))}
       </nav>
 
-      <!-- Buttons: Book Now + Language Toggle -->
-      <div class="hidden md:flex items-center space-x-4">
-        
-        <!-- Language Toggle -->
-        <div class="text-sm font-medium text-gray-500 flex space-x-2 border-r pr-4 border-gray-300">
-          <a href="/en" class={lang === 'en' ? 'text-gray-900 font-bold' : 'hover:text-gray-900'}>EN</a>
+      <!-- Right side icons & Mobile Menu Button -->
+      <div class="flex items-center gap-1 sm:gap-2">
+        <!-- Language Toggle (optional, you can add it here if you like) -->
+        <!--
+        <div class="hidden sm:flex text-sm font-medium text-white/80 space-x-2 border-r pr-4 border-white/30 nav-link">
+          <a href="/en" class={lang === 'en' ? 'text-white font-bold' : 'hover:text-white'}>EN</a>
           <span>|</span>
-          <a href="/nl" class={lang === 'nl' ? 'text-gray-900 font-bold' : 'hover:text-gray-900'}>NL</a>
+          <a href="/nl" class={lang === 'nl' ? 'text-white font-bold' : 'hover:text-white'}>NL</a>
         </div>
-
-        <a href={getRelativeLocaleUrl('/contact')} class="bg-gray-900 text-white px-5 py-2 rounded-md hover:bg-gray-800 transition">
-          {t('button.book')}
+        -->
+        <a class="hidden sm:flex p-2 nav-link text-white transition-colors duration-300 hover:text-[#4ED2CE]" aria-label="Language" href={lang === 'en' ? '/nl' : '/en'}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
         </a>
+        <a class="hidden sm:flex p-2 nav-link text-white transition-colors duration-300 hover:text-[#4ED2CE]" aria-label="E-guides Shop" href={getRelativeLocaleUrl('/eguides')}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+        </a>
+        
+        <!-- Mobile Menu "Hamburger" Button -->
+        <button id="open-menu-btn" type="button" class="md:hidden p-2 nav-link text-white transition-colors duration-300 hover:text-[#4ED2CE]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        </button>
       </div>
-
     </div>
   </div>
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main Menu" class="fixed inset-0 z-[100] md:hidden transition-[visibility] duration-500 pointer-events-none invisible delay-300">
+  <!-- This is the container that slides up -->
+  <div id="mobile-menu-container" class="absolute inset-0 flex flex-col bg-gradient-to-b from-[#1CABB0] via-[#1ba9ae] to-[#4ED2CE] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] translate-y-full">
+    <div class="flex items-center justify-between px-6 pt-6 pb-2">
+      <span class="font-serif italic text-lg text-white/90">Where do you want to go?</span>
+      <button id="close-menu-btn" type="button" class="rounded-full bg-white/15 p-3 text-white backdrop-blur-sm transition-colors hover:bg-white/25" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </div>
+    <!-- Mobile Navigation Links with staggered animation classes -->
+    <nav class="flex flex-1 flex-col justify-center gap-1 px-8 pb-16">
+      {navLinks.map(link => (
+         <a href={getRelativeLocaleUrl(link.href)} class="mobile-nav-link block border-b border-white/15 py-4 text-3xl font-bold tracking-tight transition-all duration-500 sm:text-4xl text-white/85 hover:text-white translate-x-8 opacity-0">
+           {link.text}
+         </a>
+       ))}
+    </nav>
+  </div>
+</div>
+
+
+<!-- 
+  This script handles all interactivity for the header.
+  It's a standard script tag, so Astro will process and bundle it.
+-->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('main-header');
+    const logoSubtitle = document.getElementById('logo-subtitle');
+    
+    // 1. Scroll Behavior
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        header?.classList.add('scrolled');
+      } else {
+        header?.classList.remove('scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Run on load in case the page is reloaded scrolled down
+
+    // 2. Mobile Menu Behavior
+    const openBtn = document.getElementById('open-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuContainer = document.getElementById('mobile-menu-container');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    const body = document.body;
+
+    const openMenu = () => {
+      if (!mobileMenu || !mobileMenuContainer) return;
+      
+      mobileMenu.classList.remove('invisible', 'pointer-events-none');
+      mobileMenuContainer.classList.remove('translate-y-full');
+      openBtn?.setAttribute('aria-expanded', 'true');
+      body.style.overflow = 'hidden'; // Prevent background scroll
+
+      // Staggered link animation
+      mobileNavLinks.forEach((link, index) => {
+        (link as HTMLElement).style.transitionDelay = `${index * 60}ms`;
+        link.classList.remove('translate-x-8', 'opacity-0');
+      });
+    };
+
+    const closeMenu = () => {
+      if (!mobileMenu || !mobileMenuContainer) return;
+      
+      mobileMenuContainer.classList.add('translate-y-full');
+      openBtn?.setAttribute('aria-expanded', 'false');
+      body.style.overflow = ''; // Restore background scroll
+
+      // Reset link animations
+      mobileNavLinks.forEach((link) => {
+        (link as HTMLElement).style.transitionDelay = '0ms';
+        link.classList.add('translate-x-8', 'opacity-0');
+      });
+      
+      // Hide the menu completely after the slide-out animation finishes
+      setTimeout(() => {
+        mobileMenu.classList.add('invisible', 'pointer-events-none');
+      }, 500);
+    };
+
+    openBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+    
+    // Close menu when a link is clicked
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  });
+</script>
+
+
+<!-- 
+  These styles are scoped to this component.
+  They define the look of the header when the 'scrolled' class is active.
+-->
+<style>
+  #main-header.scrolled {
+    background-color: rgba(255, 253, 250, 0.85);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* When scrolled, change the color of nav links and the logo subtitle */
+  #main-header.scrolled .nav-link,
+  #main-header.scrolled #logo-subtitle {
+    color: #374151; /* text-gray-700 */
+  }
+
+  /* Ensure the hover color still works correctly */
+  #main-header.scrolled .nav-link:hover {
+    color: #4ED2CE;
+  }
+</style>

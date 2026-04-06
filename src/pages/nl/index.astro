@@ -1,12 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/ui/Hero.astro';
+import backgroundImage from '../../assets/moalboal_drone_2.webp';
+// import backgroundImage from '../../assets/pexels-1320686.jpeg';
 ---
 
 <BaseLayout title="Home | MAYWAY Travels">
   
   <!-- We pass the Dutch text as props to the reusable Hero component -->
   <Hero 
+    heroImage={backgroundImage}
     titleLine1="Jouw avontuur,"
     titleLine2="YOUR WAY"
     subtitle="Personal travel experiences & custom routes"
