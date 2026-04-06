@@ -10,7 +10,7 @@ export default defineConfig({
     defaultLocale: 'nl',
     locales: ['en', 'nl'],
     routing: {
-      prefixDefaultLocale: false, // "false" means default (currently English) URLs don't need /en/
+      prefixDefaultLocale: false, // "false" means default (currently Dutch) URLs don't need /en/
       redirectToDefaultLocale: true // If they visit "/", send them to English
     }
   }
