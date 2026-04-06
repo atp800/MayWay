@@ -1,0 +1,71 @@
+---
+// src/components/ui/Hero.astro
+import { Image } from 'astro:assets';
+import backgroundImage from '../../assets/pexels-1320686.jpeg';
+
+
+interface Props {
+  heroImage: ImageMetadata; 
+  titleLine1: string;
+  titleLine2: string;
+  subtitle: string;
+  primaryButtonText: string;
+  secondaryButtonText: string;
+  primaryButtonLink: string;
+  secondaryButtonLink: string;
+}
+
+const { 
+  heroImage,
+  titleLine1, 
+  titleLine2, 
+  subtitle, 
+  primaryButtonText, 
+  secondaryButtonText,
+  primaryButtonLink,
+  secondaryButtonLink 
+} = Astro.props;
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden -mt-16">
+  <!-- Video Overlay Gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-900/40 via-gray-900/20 to-transparent z-10"></div>
+  
+  <!-- Background Video -->
+  <!-- <video class="absolute inset-0 z-0 h-full w-full object-cover motion-reduce:hidden" autoplay loop muted playsinline poster="/images/pexels-1320686.jpeg">
+    <source src="https://cdn.coverr.co/videos/surfer-catching-a-wave-z9d2tcquzp/1080p.mp4" type="video/mp4">
+  </video> -->
+
+  <!-- Background Image (replaces video above) -->
+  <Image 
+    src={backgroundImage} 
+    alt="Breathtaking aerial view of a tropical coastline" 
+    class="absolute inset-0 z-0 h-full w-full object-cover"
+    loading="eager"
+    quality="mid"
+  />
+
+  <!-- Content -->
+  <div class="relative z-20 text-center px-6 max-w-4xl mx-auto">
+    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+      <span class="block">{titleLine1}</span>
+      <span class="block"><span class="italic text-[#4ED2CE] font-serif">{titleLine2}</span>.</span>
+    </h1>
+    
+    <p class="text-xl md:text-2xl text-white mb-10 font-semibold tracking-wide">
+      {subtitle}
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href={primaryButtonLink} class="inline-flex items-center justify-center px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 bg-[#4ED2CE] hover:bg-[#1CABB0] text-white shadow-lg hover:shadow-xl">
+        {primaryButtonText}
+      </a>
+      <a href={secondaryButtonLink} class="inline-flex items-center justify-center px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 bg-white/10 backdrop-blur-lg text-white border border-white/50 hover:bg-white/20 shadow-sm">
+        {secondaryButtonText}
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom Gradient blending into the next section -->
+  <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FFFDFA] to-transparent z-10"></div>
+</section>

@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/global/Hero.astro';
+import Hero from '../../components/ui/Hero.astro';
 ---
 
-<BaseLayout title="Home | MayWay">
+<BaseLayout title="Home | MAYWAY Travels">
+  
+  <!-- We pass the Dutch text as props to the reusable Hero component -->
   <Hero 
-    title="Your adventure," 
-    title2="YOUR WAY"
-    subtitle="Personalised travel & custom routes"
+    titleLine1="Your adventure,"
+    titleLine2="YOUR WAY"
+    subtitle="Personal travel experiences & custom routes"
+    primaryButtonText="Plan your trip"
+    primaryButtonLink="/en/contact"
+    secondaryButtonText="View e-guides"
+    secondaryButtonLink="/en/e-guides"
   />
+
+  <!-- The next sections (Hotspots, About Mayra, etc.) will go here! -->
+
 </BaseLayout>

@@ -3,18 +3,23 @@ import '../styles/global.css';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 
-const { title = "MayWay" } = Astro.props;
+const { title = "MAYWAY TRAVELS" } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="nl">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
+    <!-- FONTS  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
   </head>
-  <!-- Added min-h-screen and flex-col so the footer always stays at the bottom -->
-  <body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
+  <body class="bg-[#FFFDFA] text-gray-900 font-sans antialiased min-h-screen flex flex-col">
     
     <Header />
 
