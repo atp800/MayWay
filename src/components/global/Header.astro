@@ -110,14 +110,42 @@ const navLinks = [
       </button>
     </div>
     <!-- Mobile Navigation Links with staggered animation classes -->
-    <nav class="flex flex-1 flex-col justify-center gap-1 px-8 pb-16">
-      {navLinks.map(link => (
-         <a href={getRelativeLocaleUrl(link.href)} class="mobile-nav-link block border-b border-white/15 py-4 text-3xl font-bold tracking-tight transition-all duration-500 sm:text-4xl text-white/85 hover:text-white translate-x-8 opacity-0">
-           {link.text}
-         </a>
-       ))}
-    </nav>
-  </div>
+    <div class="flex flex-1 flex-col px-8 pb-10">
+        
+        <!-- Centered nav -->
+        <nav class="flex flex-1 flex-col justify-center gap-1">
+            {navLinks.map(link => (
+            <a href={getRelativeLocaleUrl(link.href)} class="mobile-nav-link block border-b border-white/15 py-4 text-3xl font-bold tracking-tight transition-all duration-500 sm:text-4xl text-white/85 hover:text-white translate-x-8 opacity-0">
+                {link.text}
+            </a>
+            ))}
+        </nav>
+
+        <!-- Bottom-right language switcher -->
+        <div class="flex justify-end mt-auto">
+            <div class="flex gap-2">
+            <a href="/en/" class:list={[
+                'px-4 py-2 rounded-full text-sm transition-all',
+                lang === 'en'
+                ? 'bg-white text-[#1CABB0] font-semibold'
+                : 'bg-white/10 text-white/80'
+            ]}>
+                EN
+            </a>
+
+            <a href="/nl/" class:list={[
+                'px-4 py-2 rounded-full text-sm transition-all',
+                lang === 'nl'
+                ? 'bg-white text-[#1CABB0] font-semibold'
+                : 'bg-white/10 text-white/80'
+            ]}>
+                NL
+            </a>
+            </div>
+        </div>
+
+        </div>
+    </div>
 </div>
 
 
