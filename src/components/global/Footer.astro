@@ -1,4 +1,4 @@
----
+<!-- --- VERSION WITH TEXT FOR INSTA/TIKTOK INSTEAD OF LOGOS
 // src/components/global/Footer.astro
 const currentYear = new Date().getFullYear();
 ---
@@ -9,8 +9,37 @@ const currentYear = new Date().getFullYear();
       &copy; {currentYear} MayWay. All rights reserved.
     </p>
     <div class="flex space-x-6 mt-4 md:mt-0">
-      <a href="#" class="text-gray-600 hover:text-gray-400">Instagram</a>
-      <a href="#" class="text-gray-600 hover:text-gray-400">TikTok</a>
+      <a href="https://www.instagram.com/maywaytravels/" class="text-gray-600 hover:text-gray-400">Instagram</a>
+      <a href="https://www.tiktok.com/@mayraxaltink" class="text-gray-600 hover:text-gray-400">TikTok</a>
+    </div>
+  </div>
+</footer> -->
+
+---
+// src/components/global/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gray-50 border-t border-white mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between items-center">
+    <p class="text-gray-600 text-sm">
+      &copy; {currentYear} MayWay. All rights reserved.
+    </p>
+
+    <div class="flex space-x-6 mt-4 md:mt-0">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/maywaytravels/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+          <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5zm0 2h8.5C18.216 4 20 5.784 20 7.75v8.5C20 18.216 18.216 20 16.25 20h-8.5C5.784 20 4 18.216 4 16.25v-8.5C4 5.784 5.784 4 7.75 4zm8.75 1a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
+        </svg>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@mayraxaltink" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+          <path d="M16.5 2c.3 1.8 1.7 3.2 3.5 3.5v3c-1.3 0-2.5-.4-3.5-1.1V15a6 6 0 11-6-6c.3 0 .7 0 1 .1v3.1c-.3-.1-.7-.2-1-.2a3 3 0 103 3V2h3z"/>
+        </svg>
+      </a>
     </div>
   </div>
 </footer>
