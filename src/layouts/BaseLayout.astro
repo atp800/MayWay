@@ -1,12 +1,15 @@
 ---
 import '../styles/global.css';
+import { defaultLang } from '../i18n/ui';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 
 const { title = "MAYWAY TRAVELS" } = Astro.props;
+const lang = Astro.currentLocale || defaultLang;
+const isHomePage = Astro.url.pathname.split('/').filter(Boolean).length <= 1;
 ---
 
-<html lang="nl">
+<html lang={lang} data-home={isHomePage}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/m_logo.svg" />

@@ -2,6 +2,7 @@
 // src/components/global/Header.astro
 import { ui, defaultLang } from '../../i18n/ui';
 
+
 // Your existing i18n logic - no changes needed here.
 const lang = Astro.currentLocale || defaultLang;
 
@@ -25,6 +26,9 @@ const navLinks = [
   { href: '/about', text: t('nav.about') },
   { href: '/contact', text: t('nav.contact') },
 ];
+
+// Check if on homepage
+const isHomePage = Astro.url.pathname.split('/').filter(Boolean).length <= 1;
 ---
 
 <!-- 
@@ -32,7 +36,8 @@ const navLinks = [
   The classes make it fixed, full-width, and apply transitions.
   It starts transparent. The 'scrolled' class will be added via JS.
 -->
-<header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-300">
+<header 
+  id="main-header" class:list={["fixed top-0 w-full z-50 transition-all duration-300", { "scrolled": !isHomePage } ]}>
   <div class="max-w-7xl mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
       
@@ -160,11 +165,15 @@ const navLinks = [
     const logoSubtitle = document.getElementById('logo-subtitle');
     
     // 1. Scroll Behavior
+    const isHomePage = document.documentElement.dataset.home === 'true';
+
     const handleScroll = () => {
+      if (!header || !isHomePage) return;
+
       if (window.scrollY > 50) {
-        header?.classList.add('scrolled');
+        header.classList.add('scrolled');
       } else {
-        header?.classList.remove('scrolled');
+        header.classList.remove('scrolled');
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
