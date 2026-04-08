@@ -10,7 +10,7 @@ export default defineConfig({
     defaultLocale: 'nl',
     locales: ['en', 'nl'],
     routing: {
-      prefixDefaultLocale: false, // "false" means default (currently Dutch) URLs don't need /en/
+      prefixDefaultLocale: true, // "false" means default (currently Dutch) URLs don't need /en/
       redirectToDefaultLocale: false // When True, if a user visits "/", send them to Dutch homepage (index.astro)
     }
   }

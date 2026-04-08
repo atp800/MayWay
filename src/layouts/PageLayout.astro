@@ -1,0 +1,16 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+// Pass the props (like title) down to the BaseLayout
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <!-- 
+    This adds a standard container, padding, and centers the content.
+    Perfect for normal text pages, contact forms, etc.
+  -->
+  <div class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+    <slot />
+  </div>
+</BaseLayout>

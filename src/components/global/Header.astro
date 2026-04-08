@@ -12,7 +12,8 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
 function getRelativeLocaleUrl(path: string) {
   // We add a trailing slash to base URLs for consistency
   const basePath = path === '/' ? '/' : `${path}/`;
-  return lang === defaultLang ? basePath : `/${lang}${basePath}`;
+  // return lang === defaultLang ? basePath : `/${lang}${basePath}`;  //- defaultLang case means if in default there's not language in the url like /nl/ or /en/
+  return `/${lang}${basePath}`;                                       //- this version always inserts /nl/ or /en/ into urls
 }
 
 // Define your navigation links in one place for easy maintenance (DRY principle)
