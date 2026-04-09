@@ -17,6 +17,17 @@ function getRelativeLocaleUrl(path: string) {
   return `/${lang}${basePath}`;                                       //- this version always inserts /nl/ or /en/ into urls
 }
 
+// Function to swap the language of the CURRENT page
+const currentPath = Astro.url.pathname;
+function getSwitchLocaleUrl(targetLang: string) {
+  // 1. Remove the current language prefix (/nl or /en) from the URL
+  const pathWithoutLang = currentPath.replace(/^\/(nl|en)/, '');
+  // 2. Ensure it has a leading slash
+  const cleanPath = pathWithoutLang.startsWith('/') ? pathWithoutLang : `/${pathWithoutLang}`;
+  // 3. Add the new language prefix
+  return `/${targetLang}${cleanPath === '/' ? '' : cleanPath}`;
+}
+
 // Define your navigation links in one place for easy maintenance (DRY principle)
 const navLinks = [
   { href: '/', text: t('nav.home') },
@@ -76,13 +87,13 @@ const isHomePage = Astro.url.pathname.split('/').filter(Boolean).length <= 1;
                       focus:outline-none"
                role="menu" aria-orientation="vertical">
             <div class="py-1" role="none">
-              <a href="/en/" class:list={[
+              <a href={getSwitchLocaleUrl('en')} class:list={[
                   'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100',
                   { 'font-bold bg-gray-50': lang === 'en' }
                 ]} role="menuitem">
                 English (EN)
               </a>
-              <a href="/nl/" class:list={[
+              <a href={getSwitchLocaleUrl('nl')} class:list={[
                   'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100',
                   { 'font-bold bg-gray-50': lang === 'nl' }
                 ]} role="menuitem">
@@ -130,20 +141,18 @@ const isHomePage = Astro.url.pathname.split('/').filter(Boolean).length <= 1;
         <!-- Bottom-right language switcher -->
         <div class="flex justify-end mt-auto">
             <div class="flex gap-2">
-            <a href="/en/" class:list={[
+            <!-- CHANGED HERE: Using getSwitchLocaleUrl('en') -->
+            <a href={getSwitchLocaleUrl('en')} class:list={[
                 'px-4 py-2 rounded-full text-sm transition-all',
-                lang === 'en'
-                ? 'bg-white text-[#1CABB0] font-semibold'
-                : 'bg-white/10 text-white/80'
+                lang === 'en' ? 'bg-white text-[#1CABB0] font-semibold' : 'bg-white/10 text-white/80'
             ]}>
                 EN
             </a>
 
-            <a href="/nl/" class:list={[
+            <!-- CHANGED HERE: Using getSwitchLocaleUrl('nl') -->
+            <a href={getSwitchLocaleUrl('nl')} class:list={[
                 'px-4 py-2 rounded-full text-sm transition-all',
-                lang === 'nl'
-                ? 'bg-white text-[#1CABB0] font-semibold'
-                : 'bg-white/10 text-white/80'
+                lang === 'nl' ? 'bg-white text-[#1CABB0] font-semibold' : 'bg-white/10 text-white/80'
             ]}>
                 NL
             </a>

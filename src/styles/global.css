@@ -13,9 +13,21 @@
   font-family: "Zain", sans-serif;
 }
 
-
-
-
 body {
   font-family: "Zain", sans-serif; /* default font for body text */
+}
+
+
+
+
+:root {
+  --turquoise: #4ED2CE;
+  --dark-teal: #1CABB0;
+  --sand: #F7F4EF;
+  --text-dark: #1a1a1a;
+  --text-gray: #666666;
+  --white: #ffffff;
+
+  --color-bg: #FFFDFA;
+  --color-text: #222222;
 }
