@@ -1,0 +1,208 @@
+---
+// src/components/ui/EguidesContent.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { ui, defaultLang } from '../../i18n/ui';
+
+const lang = Astro.currentLocale || defaultLang;
+
+function t(key: keyof typeof ui[typeof defaultLang]) {
+  return ui[lang as keyof typeof ui][key];
+}
+---
+
+<BaseLayout title={t('eguides.title')}>
+  <div class="bg-[#FFFDFA]">
+    
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-28 pb-16 md:pb-24">
+      <div class="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#4ED2CE]/10 blur-3xl"></div>
+      <div class="pointer-events-none absolute -left-32 bottom-0 h-72 w-72 rounded-full bg-[#1CABB0]/10 blur-3xl"></div>
+      
+      <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <span class="mb-5 inline-block rounded-full bg-[#E6F6F6] px-4 py-1.5 text-sm font-semibold text-[#1CABB0]">
+            {t('eguides.hero.badge1')}
+          </span>
+          <h1 class="text-4xl font-bold leading-tight text-gray-900 md:text-5xl lg:text-[3.25rem]">
+            <span class="font-libre">{t('eguides.hero.title1')}</span> 
+            <span class="block font-dancing text-5xl text-[#4ED2CE] md:inline md:text-6xl lg:text-7xl">{t('eguides.hero.title2')}</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-gray-600">
+            {t('eguides.hero.desc')}
+          </p>
+          
+          <div class="mt-6 flex flex-wrap items-center gap-2">
+            <!-- 5 Stars -->
+            {[...Array(5)].map(() => (
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star fill-amber-400 text-amber-400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            ))}
+            <span class="ml-2 text-sm font-medium text-gray-600">{t('eguides.hero.rating')}</span>
+          </div>
+          
+          <div class="mt-8 flex flex-wrap items-baseline gap-4">
+            <span class="text-4xl font-bold text-[#1CABB0]">{t('eguides.hero.price')}</span>
+            <span class="text-xl text-gray-400 line-through">{t('eguides.hero.oldprice')}</span>
+            <span class="rounded-full bg-rose-100 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-rose-600">{t('eguides.hero.discount')}</span>
+          </div>
+          
+          <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href={`/${lang}/contact`} class="inline-flex items-center justify-center px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 bg-[#4ED2CE] hover:bg-[#1CABB0] text-white shadow-lg hover:shadow-xl">
+              {t('eguides.hero.buybtn')}
+            </a>
+            <a href="#inhoud" class="inline-flex items-center justify-center rounded-full border-2 border-[#4ED2CE] px-8 py-3 font-medium text-[#1CABB0] transition-all hover:bg-[#E6F6F6]">
+              {t('eguides.hero.previewbtn')}
+            </a>
+          </div>
+        </div>
+        
+        <div class="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
+          <div class="absolute -right-2 -top-3 z-10 rotate-2 rounded-full bg-[#4ED2CE] px-4 py-2 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
+            {t('eguides.hero.badge2')}
+          </div>
+          <div class="relative overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#E8FAF9] to-[#d4f3f1] p-4 shadow-2xl ring-1 ring-black/5">
+            <div class="overflow-hidden rounded-2xl shadow-inner">
+              <!-- Note: Change this src to the correct image in your public/images folder! -->
+              <img src="/images/pexels-1320686.jpeg" alt="Interactive guide Australia" class="aspect-[4/3] w-full object-cover">
+            </div>
+            <div class="absolute bottom-5 left-5 rounded-2xl bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm">
+              <p class="text-xs font-semibold uppercase tracking-wide text-[#1CABB0]">{t('eguides.hero.included')}</p>
+              <p class="text-lg font-bold text-gray-900">{t('eguides.hero.modules')}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-[#4ED2CE] to-[#2eb8b3] py-20 text-white">
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.06%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-40"></div>
+      <div class="relative mx-auto max-w-6xl px-6">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="font-libre text-3xl font-semibold md:text-4xl">{t('eguides.features.title')}</h2>
+          <p class="mt-3 text-lg text-white/90">{t('eguides.features.desc')}</p>
+        </div>
+        <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3, 4, 5, 6].map((num) => (
+            <div class="flex items-start gap-4 rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm transition-transform hover:bg-white/15">
+              <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-white"><path d="M20 6 9 17l-5-5"></path></svg>
+              </span>
+              <span class="pt-1.5 text-left font-medium leading-snug">{t(`eguides.features.${num}` as any)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section id="inhoud" class="scroll-mt-24 py-20 md:py-28">
+      <div class="mx-auto max-w-6xl px-6">
+        <p class="text-center text-sm font-bold uppercase tracking-[0.2em] text-[#4ED2CE]">{t('eguides.modules.badge')}</p>
+        <h2 class="mt-2 text-center font-libre text-3xl font-bold text-gray-900 md:text-4xl">{t('eguides.modules.title')}</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-center text-lg text-gray-600">{t('eguides.modules.desc')}</p>
+        
+        <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          
+          <!-- Module 1 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plane "><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 1</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod1.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod1.desc')}</p>
+          </article>
+
+          <!-- Module 2 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe "><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 2</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod2.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod2.desc')}</p>
+          </article>
+
+          <!-- Module 3 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase "><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 3</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod3.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod3.desc')}</p>
+          </article>
+
+          <!-- Module 4 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home "><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 4</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod4.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod4.desc')}</p>
+          </article>
+
+          <!-- Module 5 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-laptop "><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 5</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod5.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod5.desc')}</p>
+          </article>
+
+          <!-- Module 6 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet "><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 6</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod6.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod6.desc')}</p>
+          </article>
+
+          <!-- Module 7 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin "><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 7</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod7.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod7.desc')}</p>
+          </article>
+
+          <!-- Module 8 -->
+          <article class="group flex flex-col rounded-2xl border border-[#E6F6F6] bg-gradient-to-b from-[#F5FCFC] to-white p-6 shadow-sm transition-all hover:border-[#4ED2CE]/40 hover:shadow-md">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#4ED2CE]/15 text-[#1CABB0] transition-colors group-hover:bg-[#4ED2CE]/25">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open "><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[#4ED2CE]">Module 8</p>
+            <h3 class="mt-2 text-lg font-bold text-gray-900">{t('eguides.mod8.title')}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{t('eguides.mod8.desc')}</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Section -->
+    <section class="border-t border-white/10 bg-gradient-to-br from-[#1CABB0] via-[#1ba9ae] to-[#15939a] py-20 text-center text-white">
+      <div class="mx-auto max-w-2xl px-6">
+        <span class="inline-block rounded-full bg-white/15 px-4 py-1 text-xs font-semibold uppercase tracking-wider">
+          {t('eguides.cta.badge')}
+        </span>
+        <h2 class="mt-6 font-libre text-3xl font-semibold md:text-4xl">{t('eguides.cta.title')}</h2>
+        <p class="mt-4 text-lg text-white/90">{t('eguides.cta.desc')}</p>
+        <div class="mt-10 flex flex-col items-center gap-3">
+          <a href={`/${lang}/contact`} class="inline-flex items-center justify-center px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 bg-white text-[#1CABB0] hover:bg-[#E6F6F6] hover:text-[#15939a] shadow-xl">
+            {t('eguides.cta.btn')}
+          </a>
+          <p class="text-sm text-white/80">{t('eguides.cta.sub')}</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

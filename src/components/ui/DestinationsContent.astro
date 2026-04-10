@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { ui, defaultLang } from '../../i18n/ui';
+import WorldMap from '../../components/ui/WorldMap.astro';
+
+const lang = Astro.currentLocale || defaultLang;
+
+function t(key: keyof typeof ui[typeof defaultLang]) {
+  return ui[lang as keyof typeof ui][key];
+}
+
+// Data for our markers (Positions are relative percentages based on the SVG map below)
+const destinations = [
+  {
+    id: 'indonesia',
+    top: '62%', 
+    left: '83%',
+    name: t('destinations.indo.name'),
+    desc: t('destinations.indo.desc'),
+    // Replace with an actual image from your public/images/ folder
+    img: '/images/pexels-1320686.jpeg' 
+  },
+  {
+    id: 'australia',
+    top: '76%', 
+    left: '85%',
+    name: t('destinations.aus.name'),
+    desc: t('destinations.aus.desc'),
+    // Replace with an actual image from your public/images/ folder
+    img: '/images/back%20on%20the%20island%F0%9F%98%83.jpg'
+  },
+  {
+    id: 'new-zealand',
+    top: '83%', 
+    left: '93%',
+    name: t('destinations.nz.name'),
+    desc: t('destinations.nz.desc'),
+    // Replace with an actual image from your public/images/ folder
+    img: '/images/pexels-5066013.jpeg'
+  }
+];
+---
+
+<BaseLayout title={t('destinations.title')}>
+  <div class="bg-[#FFFDFA] relative z-0 flex-grow pt-28 md:pt-36 pb-20 px-6 overflow-hidden font-zain">
+    
+    <div class="max-w-6xl mx-auto text-center mb-12">
+      <h1 class="font-libre text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
+        {t('destinations.heading')}
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {t('destinations.subheading')}
+      </p>
+    </div>
+
+    <!-- Map Container -->
+    <!-- overflow-x-auto allows scrolling on mobile if the map is wider than the screen -->
+    <div class="w-full mx-auto overflow-x-auto pb-10 hide-scrollbar cursor-grab active:cursor-grabbing">
+      <div class="relative w-full max-w-[1400px] mx-auto aspect-[2000/857] min-w-[320px]">
+        
+        <!-- Background SVG Map (Colored in very light Turquoise #E8FAF9) -->
+        <!-- This is a simplified, high-quality world map path -->
+        <WorldMap class="absolute inset-0 w-full h-full text-[#E8FAF9]" />
+
+        <!-- Loop over our destinations to render the markers and hover cards -->
+        {destinations.map(dest => (
+          <div 
+            class="absolute group cursor-pointer" 
+            style={`top: ${dest.top}; left: ${dest.left}; transform: translate(-50%, -50%); z-index: 10;`}
+          >
+            <!-- Pulse Animation Background -->
+            <div class="absolute inset-0 bg-[#4ED2CE] rounded-full animate-ping opacity-75 group-hover:hidden"></div>
+            
+            <!-- Map Marker Pin -->
+            <div class="relative flex items-center justify-center w-8 h-8 bg-[#1CABB0] border-[3px] border-white rounded-full shadow-lg group-hover:bg-[#4ED2CE] transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+
+            <!-- Hover Bubble Card -->
+            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 origin-bottom flex flex-col overflow-hidden">
+              <!-- Tail pointing down -->
+              <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b border-r border-gray-100 rotate-45"></div>
+              
+              <!-- Card Image -->
+              <div class="h-32 w-full overflow-hidden">
+                <img src={dest.img} alt={dest.name} class="w-full h-full object-cover" />
+              </div>
+              
+              <!-- Card Content -->
+              <div class="p-4 relative bg-white">
+                <h3 class="font-bold text-gray-900 text-lg mb-1">{dest.name}</h3>
+                <p class="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                  {dest.desc}
+                </p>
+                <a href={`/${lang}/contact`} class="block text-center w-full bg-[#4ED2CE] hover:bg-[#1CABB0] text-white py-2 rounded-xl font-bold text-sm transition-colors">
+                  {t('destinations.btn')}
+                </a>
+              </div>
+            </div>
+
+          </div>
+        ))}
+
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  /* Hide the scrollbar for the map container but allow scrolling */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+</style>

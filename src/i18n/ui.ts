@@ -51,6 +51,75 @@ export const ui = {
     'contact.form.messageLabel': 'Message',
     'contact.form.messagePlaceholder': 'Tell me briefly about your plans...',
     'contact.form.submit': 'Send message',
+
+    // eguides
+        // E-Guides Page
+    'eguides.title': 'E-guides | MAYWAY Travels',
+    'eguides.hero.badge1': 'Digital product',
+    'eguides.hero.title1': 'Interactive guide',
+    'eguides.hero.title2': 'Australia',
+    'eguides.hero.desc': 'All-in-one for backpackers, working holidaymakers and those who want to discover Australia at their own pace — with my itineraries, maps and personal notes.',
+    'eguides.hero.rating': 'More than 200 satisfied travelers',
+    'eguides.hero.price': '€14.99',
+    'eguides.hero.oldprice': '€24.99',
+    'eguides.hero.discount': '-40%',
+    'eguides.hero.buybtn': 'Buy now — €14.99',
+    'eguides.hero.previewbtn': 'Watch preview',
+    'eguides.hero.badge2': 'Direct download',
+    'eguides.hero.included': 'Included',
+    'eguides.hero.modules': '8 modules',
+    
+    'eguides.features.title': 'What makes this guide special?',
+    'eguides.features.desc': 'Everything you need, in one guidebook.',
+    'eguides.features.1': '8 comprehensive modules',
+    'eguides.features.2': 'Interactive and digital',
+    'eguides.features.3': 'Available immediately after purchase',
+    'eguides.features.4': 'Regularly updated',
+    'eguides.features.5': 'Personal tips & experiences',
+    'eguides.features.6': 'Handy checklists',
+    
+    'eguides.modules.badge': 'Contents',
+    'eguides.modules.title': '8 modules',
+    'eguides.modules.desc': 'From preparation to practical resources — built on real experience, not dry wiki texts.',
+    'eguides.mod1.title': 'Preparation',
+    'eguides.mod1.desc': 'Visa, insurance, packing and timeline — quietly prepared for departure.',
+    'eguides.mod2.title': 'Why Australia',
+    'eguides.mod2.desc': 'Climate, culture and what you can really expect.',
+    'eguides.mod3.title': 'Working Holiday',
+    'eguides.mod3.desc': 'Application, tips and pitfalls for your WHV.',
+    'eguides.mod4.title': 'Housing',
+    'eguides.mod4.desc': 'Hostels, rentals and first nights — practical and fair.',
+    'eguides.mod5.title': 'Work',
+    'eguides.mod5.desc': 'Jobs, network and how to start smart.',
+    'eguides.mod6.title': 'Budget',
+    'eguides.mod6.desc': 'Cost, save and track without stress.',
+    'eguides.mod7.title': 'Sydney & Melbourne',
+    'eguides.mod7.desc': 'Routes, hotspots and hidden gems in two iconic cities.',
+    'eguides.mod8.title': 'Resources',
+    'eguides.mod8.desc': 'Links, downloads and tools that I use myself.',
+
+    'eguides.cta.badge': 'Your adventure begins here',
+    'eguides.cta.title': 'Ready to start?',
+    'eguides.cta.desc': 'Download the guide immediately after purchase and start planning today — at your own pace, with my maps and routes in your pocket.',
+    'eguides.cta.btn': 'Buy now — €14.99',
+    'eguides.cta.sub': 'Available immediately after purchase',
+
+    // destinations
+    'destinations.title': 'Destinations | MAYWAY Travels',
+    'destinations.heading': 'Where do you want to go?',
+    'destinations.subheading': 'Discover my favorite destinations. Click or hover over a marker on the map to explore.',
+    
+    'destinations.aus.name': 'Australia', // aus
+    'destinations.aus.desc': 'Explore the rugged outback, stunning coastlines, and vibrant cities at your own pace.',
+    
+    'destinations.nz.name': 'New Zealand', // nz
+    'destinations.nz.desc': 'Discover majestic fjords, lush mountains, and breathtaking natural beauty.',
+    
+    'destinations.indo.name': 'Indonesia', // indo
+    'destinations.indo.desc': 'Experience tropical islands, ancient temples, and a rich, warm culture.',
+    
+    'destinations.btn': 'Plan your trip',
+
   },
   nl: {
     // homepage and menu
@@ -97,6 +166,74 @@ export const ui = {
     'contact.form.messageLabel': 'Bericht',
     'contact.form.messagePlaceholder': 'Vertel me kort iets over je plannen...',
     'contact.form.submit': 'Verstuur bericht',
+
+    // eguides
+    'eguides.title': 'E-gidsen | MAYWAY Travels',
+    'eguides.hero.badge1': 'Digitaal product',
+    'eguides.hero.title1': 'Interactieve gids',
+    'eguides.hero.title2': 'Australië',
+    'eguides.hero.desc': 'All-in-one voor backpackers, working holidaymakers en iedereen die Australië op eigen tempo wil ontdekken — met mijn routes, kaarten en persoonlijke notities.',
+    'eguides.hero.rating': 'Meer dan 200 tevreden reizigers',
+    'eguides.hero.price': '€14,99',
+    'eguides.hero.oldprice': '€24,99',
+    'eguides.hero.discount': '-40%',
+    'eguides.hero.buybtn': 'Koop nu — €14,99',
+    'eguides.hero.previewbtn': 'Bekijk preview',
+    'eguides.hero.badge2': 'Direct download',
+    'eguides.hero.included': 'Inclusief',
+    'eguides.hero.modules': '8 modules',
+    
+    'eguides.features.title': 'Wat maakt deze gids speciaal?',
+    'eguides.features.desc': 'Alles wat je nodig hebt, in één gids.',
+    'eguides.features.1': '8 uitgebreide modules',
+    'eguides.features.2': 'Interactief en digitaal',
+    'eguides.features.3': 'Direct beschikbaar na aankoop',
+    'eguides.features.4': 'Regelmatig geüpdatet',
+    'eguides.features.5': 'Persoonlijke tips & ervaringen',
+    'eguides.features.6': 'Handige checklists',
+    
+    'eguides.modules.badge': 'Inhoud',
+    'eguides.modules.title': '8 modules',
+    'eguides.modules.desc': 'Van voorbereiding tot praktische hulpmiddelen — gebouwd op echte ervaring, niet op droge wiki-teksten.',
+    'eguides.mod1.title': 'Voorbereiding',
+    'eguides.mod1.desc': 'Visum, verzekering, inpakken en tijdlijn — rustig voorbereid op vertrek.',
+    'eguides.mod2.title': 'Waarom Australië',
+    'eguides.mod2.desc': 'Klimaat, cultuur en wat je écht kunt verwachten.',
+    'eguides.mod3.title': 'Working Holiday',
+    'eguides.mod3.desc': 'Aanvraag, tips en valkuilen voor je WHV.',
+    'eguides.mod4.title': 'Huisvesting',
+    'eguides.mod4.desc': 'Hostels, huur en de eerste nachten — praktisch en eerlijk.',
+    'eguides.mod5.title': 'Werken',
+    'eguides.mod5.desc': 'Banen, netwerk en hoe je slim start.',
+    'eguides.mod6.title': 'Budget',
+    'eguides.mod6.desc': 'Kosten, besparen en tracken zonder stress.',
+    'eguides.mod7.title': 'Sydney & Melbourne',
+    'eguides.mod7.desc': 'Routes, hotspots en verborgen parels in twee iconische steden.',
+    'eguides.mod8.title': 'Resources',
+    'eguides.mod8.desc': 'Links, downloads en tools die ik zelf gebruik.',
+
+    'eguides.cta.badge': 'Jouw avontuur begint hier',
+    'eguides.cta.title': 'Klaar om te beginnen?',
+    'eguides.cta.desc': 'Download de gids direct na je aankoop en start vandaag nog met plannen — op jouw tempo, met mijn kaarten en routes in je zak.',
+    'eguides.cta.btn': 'Koop nu — €14,99',
+    'eguides.cta.sub': 'Direct beschikbaar na aankoop',
+
+        
+    // destinations
+    'destinations.title': 'Bestemmingen | MAYWAY Travels',
+    'destinations.heading': 'Waar wil je naartoe?',
+    'destinations.subheading': 'Ontdek mijn favoriete bestemmingen. Klik of hover over een marker op de kaart om meer te zien.',
+    
+    'destinations.aus.name': 'Australië', // aus
+    'destinations.aus.desc': 'Verken de ruige outback, prachtige kustlijnen en bruisende steden op je eigen tempo.',
+    
+    'destinations.nz.name': 'Nieuw-Zeeland', // nz
+    'destinations.nz.desc': 'Ontdek majestueuze fjorden, weelderige bergen en adembenemende natuur.',
+    
+    'destinations.indo.name': 'Indonesië', // indo
+    'destinations.indo.desc': 'Ervaar tropische eilanden, eeuwenoude tempels en een rijke, warme cultuur.',
+    
+    'destinations.btn': 'Plan jouw reis',
   },
 } as const;
 
