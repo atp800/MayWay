@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AustraliaCarousel from "./AustraliaCarousel.astro";
 import { ui, defaultLang } from '../../i18n/ui';
 
 // Get current language based on the folder structure (/en/ or /nl/)
@@ -100,4 +101,5 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
     </div>
 
   </div>
+  <AustraliaCarousel />
 </BaseLayout>
