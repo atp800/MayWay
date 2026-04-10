@@ -52,7 +52,7 @@ const destinations = [
     </div>
 
     <!-- Map Container -->
-    <div class="w-full mx-auto overflow-x-auto pb-10 hide-scrollbar cursor-grab active:cursor-grabbing">
+    <div class="max-[499px]:hidden w-full mx-auto overflow-x-auto pb-10 hide-scrollbar cursor-grab active:cursor-grabbing">
       <div class="relative w-full max-w-[1400px] mx-auto aspect-[2000/857] min-w-[450px]">
         
         <WorldMap class="absolute inset-0 w-full h-full text-[#E8FAF9]" />
@@ -68,7 +68,7 @@ const destinations = [
             <div class="absolute inset-0 bg-[#4ED2CE] rounded-full animate-ping opacity-75 group-[.is-active]:hidden"></div>
             
             <!-- Map Marker Pin -->
-            <div class="relative flex items-center justify-center w-8 h-8 bg-[#1CABB0] border-[3px] border-white rounded-full shadow-lg group-[.is-active]:bg-[#4ED2CE] transition-colors duration-300">
+            <div class="relative flex items-center justify-center w-8 h-8 bg-[#11888c] border-[3px] border-white rounded-full shadow-lg group-[.is-active]:bg-[#4ED2CE] transition-colors duration-300">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
