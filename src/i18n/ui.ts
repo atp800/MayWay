@@ -104,6 +104,25 @@ export const ui = {
     'eguides.cta.btn': 'Buy now — €14.99',
     'eguides.cta.sub': 'Available immediately after purchase',
 
+
+    // advice
+    "advice.kicker": "Tips & mindset",
+    "advice.title": "Travel advice",
+    "advice.subtitle":
+    "Practical insights from real travel experience — not theory, just what actually helps on the road.",
+    "advice.plan.title": "Plan without a rigid schedule",
+    "advice.plan.text": "Keep your itinerary flexible. A loose route leaves space for spontaneous detours and better local experiences.",
+    "advice.budget.title": "Keep your budget realistic",
+    "advice.budget.text": "Work with a daily spending range and track transport costs by region — they can vary a lot more than expected.",
+    "advice.safety.title": "Insurance & safety",
+    "advice.safety.text": "Make sure you’re covered for activities, rentals, and longer trips. Keep digital copies of important documents.",
+    "advice.maps.title": "Navigation & offline maps",
+    "advice.maps.text": "Download offline maps before you travel and save key locations so you can navigate even without signal.",
+    "advice.cta.title": "Want everything in one place?",
+    "advice.cta.text": "The full guide includes preparation, budgeting, working abroad, accommodation, and personal itineraries.",
+    "advice.cta.link": "View the guide →",
+
+
     // destinations
     'destinations.title': 'Destinations | MAYWAY Travels',
     'destinations.heading': 'Where do you want to go?',
@@ -217,6 +236,21 @@ export const ui = {
     'eguides.cta.desc': 'Download de gids direct na je aankoop en start vandaag nog met plannen — op jouw tempo, met mijn kaarten en routes in je zak.',
     'eguides.cta.btn': 'Koop nu — €14,99',
     'eguides.cta.sub': 'Direct beschikbaar na aankoop',
+
+
+    // advice
+    "advice.kicker": "Tips & mindset",
+    "advice.title": "Reisadvies",
+    "advice.subtitle": "Praktische inzichten uit echte reiservaring — geen theorie, alleen wat echt werkt onderweg.",
+    "advice.plan.title": "Plan zonder strak schema",
+    "advice.plan.text": "Laat ruimte in je planning. Een flexibele route zorgt voor spontane stops en betere lokale ervaringen.",    "advice.budget.title": "Houd je budget realistisch",
+    "advice.budget.text": "Werk met een dagbudget en houd rekening met transportkosten per regio — die kunnen flink verschillen.",    "advice.safety.title": "Verzekering & veiligheid",
+    "advice.safety.text": "Zorg dat je verzekerd bent voor activiteiten, verhuur en langere reizen. Bewaar belangrijke documenten digitaal.",
+    "advice.maps.title": "Navigatie & offline kaarten",
+    "advice.maps.text": "Download offline kaarten en sla belangrijke locaties op zodat je ook zonder bereik kunt navigeren.",
+    "advice.cta.title": "Alles in één pakket?",
+    "advice.cta.text": "De complete gids bevat voorbereiding, budgettering, werken in het buitenland, verblijf en persoonlijke routes.",
+    "advice.cta.link": "Bekijk de gids →",
 
         
     // destinations
