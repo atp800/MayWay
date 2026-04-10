@@ -56,7 +56,7 @@ const destinations = [
     <!-- Map Container -->
     <!-- overflow-x-auto allows scrolling on mobile if the map is wider than the screen -->
     <div class="w-full mx-auto overflow-x-auto pb-10 hide-scrollbar cursor-grab active:cursor-grabbing">
-      <div class="relative w-full max-w-[1400px] mx-auto aspect-[2000/857] min-w-[320px]">
+      <div class="relative w-full max-w-[1400px] mx-auto aspect-[2000/857] min-w-[450px]">
         
         <!-- Background SVG Map (Colored in very light Turquoise #E8FAF9) -->
         <!-- This is a simplified, high-quality world map path -->
@@ -78,6 +78,9 @@ const destinations = [
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
             </div>
+
+            <!-- Invisible Hover bridge (stops card dsiappearing when mousing over) -->
+            <div class="absolute left-1/2 -translate-x-1/2 bottom-full w-64 h-6"></div>
 
             <!-- Hover Bubble Card -->
             <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 origin-bottom flex flex-col overflow-hidden">

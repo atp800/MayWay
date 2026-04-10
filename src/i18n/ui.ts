@@ -107,7 +107,7 @@ export const ui = {
     // destinations
     'destinations.title': 'Destinations | MAYWAY Travels',
     'destinations.heading': 'Where do you want to go?',
-    'destinations.subheading': 'Discover my favorite destinations. Click or hover over a marker on the map to explore.',
+    'destinations.subheading': 'Click or hover over a marker on the map to explore',
     
     'destinations.aus.name': 'Australia', // aus
     'destinations.aus.desc': 'Explore the rugged outback, stunning coastlines, and vibrant cities at your own pace.',
@@ -222,7 +222,7 @@ export const ui = {
     // destinations
     'destinations.title': 'Bestemmingen | MAYWAY Travels',
     'destinations.heading': 'Waar wil je naartoe?',
-    'destinations.subheading': 'Ontdek mijn favoriete bestemmingen. Klik of hover over een marker op de kaart om meer te zien.',
+    'destinations.subheading': 'Klik of hover over een marker op de kaart om meer te zien',
     
     'destinations.aus.name': 'Australië', // aus
     'destinations.aus.desc': 'Verken de ruige outback, prachtige kustlijnen en bruisende steden op je eigen tempo.',
