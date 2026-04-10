@@ -137,7 +137,7 @@ export const ui = {
     'destinations.indo.name': 'Indonesia', // indo
     'destinations.indo.desc': 'Experience tropical islands, ancient temples, and a rich, warm culture.',
     
-    'destinations.btn': 'Plan your trip',
+    'destinations.btn': 'Plan your trip!',
 
   },
   nl: {
@@ -267,7 +267,7 @@ export const ui = {
     'destinations.indo.name': 'Indonesië', // indo
     'destinations.indo.desc': 'Ervaar tropische eilanden, eeuwenoude tempels en een rijke, warme cultuur.',
     
-    'destinations.btn': 'Plan jouw reis',
+    'destinations.btn': 'Plan jouw reis!',
   },
 } as const;
 

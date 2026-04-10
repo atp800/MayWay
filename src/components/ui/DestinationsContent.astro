@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { ui, defaultLang } from '../../i18n/ui';
 import WorldMap from '../../components/ui/WorldMap.astro';
+import DestinationsGrid from '../../components/ui/DestinationsGrid.astro';
 
 const lang = Astro.currentLocale || defaultLang;
 
@@ -35,7 +36,7 @@ const destinations = [
     desc: t('destinations.nz.desc'),
     img: '/images/pexels-5066013.jpeg'
   }
-];
+].sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <BaseLayout title={t('destinations.title')}>
@@ -101,6 +102,8 @@ const destinations = [
 
       </div>
     </div>
+
+    <DestinationsGrid destinations={destinations} />
 
   </div>
 </BaseLayout>

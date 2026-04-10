@@ -1,0 +1,73 @@
+---
+import { ui, defaultLang } from '../../i18n/ui';
+
+const lang = Astro.currentLocale || defaultLang;
+
+function t(key: keyof typeof ui[typeof defaultLang]) {
+  return ui[lang as keyof typeof ui][key];
+}
+
+// Accept the destinations data as a prop so we don't have to duplicate it
+export interface Props {
+  destinations: {
+    id: string;
+    name: string;
+    desc: string;
+    img: string;
+  }[];
+}
+
+const { destinations } = Astro.props;
+---
+
+<div class="w-full max-w-6xl mx-auto px-6 py-12">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8">
+    
+    {destinations.map((dest) => (
+      /* Vertical rectangular card (aspect-[4/5] gives a nice portrait shape) */
+      <div class="group relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-lg cursor-pointer bg-gray-900">
+        
+        <!-- Background Image with zoom effect on hover -->
+        <img 
+          src={dest.img} 
+          alt={dest.name} 
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-90 group-hover:opacity-100" 
+        />
+        
+        <!-- Dark Gradient Overlay (Gets darker on hover to make text readable) -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent transition-all duration-500 group-hover:from-black/95 group-hover:via-black/60 group-hover:to-black/20"></div>
+        
+        <!-- Content Container -->
+        <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+          
+          <!-- Title -->
+          <h3 class="text-3xl font-bold text-white font-libre tracking-wide drop-shadow-md mb-0 group-hover:mb-3 transition-all duration-300">
+            {dest.name}
+          </h3>
+          
+          <!-- Hover Reveal (Description and Button) -->
+          <div class="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-in-out">
+            <div class="overflow-hidden">
+              <div class="pt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 flex flex-col gap-4">
+                
+                <p class="text-gray-200 text-sm md:text-base leading-relaxed line-clamp-4">
+                  {dest.desc}
+                </p>
+                
+                <a 
+                  href={`/${lang}/contact`} 
+                  class="mt-2 block w-full text-center bg-[#4ED2CE] hover:bg-[#1CABB0] text-white py-3.5 rounded-xl font-bold shadow-md transition-colors"
+                >
+                  {t('destinations.btn')}
+                </a>
+                
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
