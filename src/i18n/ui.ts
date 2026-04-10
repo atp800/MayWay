@@ -139,6 +139,19 @@ export const ui = {
     
     'destinations.btn': 'Plan your trip!',
 
+
+    // destination pages global
+    'labels.capital': 'Capital',
+    'labels.language': 'Language',
+    'labels.currency': 'Currency',
+
+    // destination pages - australia
+    'aus.page.title': 'Australia',
+    'aus.page.desc': 'Australia is a land of savage beauty, vast outbacks, and pristine beaches. From the iconic Sydney Opera House to the vibrant Great Barrier Reef, it offers an adventure like no other. Whether you are surfing the Gold Coast, exploring ancient rainforests, or road-tripping the Great Ocean Road, the Land Down Under is unforgettable.',
+    'aus.page.capital': 'Canberra',
+    'aus.page.language': 'English',
+    'aus.page.currency': 'Australian Dollar (AUD)',
+
   },
   nl: {
     // homepage and menu
@@ -268,6 +281,19 @@ export const ui = {
     'destinations.indo.desc': 'Ervaar tropische eilanden, eeuwenoude tempels en een rijke, warme cultuur.',
     
     'destinations.btn': 'Plan jouw reis!',
+
+
+    // destination pages global
+    'labels.capital': 'Hoofdstad',
+    'labels.language': 'Taal',
+    'labels.currency': 'Valuta',
+
+    // destination pages - australia
+    'aus.page.title': 'Australië',
+    'aus.page.desc': 'Australië is een land van ruige schoonheid, uitgestrekte outbacks en ongerepte stranden. Van het iconische Sydney Opera House tot het levendige Great Barrier Reef, het biedt een onvergelijkbaar avontuur. Of je nu surft aan de Gold Coast, oude regenwouden verkent of een roadtrip maakt over de Great Ocean Road, "Down Under" is onvergetelijk.',
+    'aus.page.capital': 'Canberra',
+    'aus.page.language': 'Engels',
+    'aus.page.currency': 'Australische Dollar (AUD)',
   },
 } as const;
 
