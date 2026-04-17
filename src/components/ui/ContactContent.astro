@@ -44,7 +44,7 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
       </div>
 
       <!-- Right Side: Contact Form -->
-      <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)]">
+      <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] relative">
         
         <form 
           action="https://api.web3forms.com/submit" 
@@ -53,8 +53,7 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
           class="needs-validation" 
           novalidate
         >
-          <!-- 🚨 WEB3FORMS ACCESS KEY 🚨 -->
-          <!-- Replace value="" with the Access Key sent to your new email -->
+          <!-- Web3Forms Access Key -->
           <input type="hidden" name="access_key" value="2959f375-6a4f-4be5-8939-f7fdf988e6fd" />
           
           <!-- Web3Forms Honeypot (Spam Protection) -->
@@ -83,13 +82,27 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
             <textarea id="bericht" name="bericht" rows="4" placeholder={t('contact.form.messagePlaceholder')} required class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-[#4ED2CE] focus:bg-white transition-colors"></textarea>
           </div>
 
-          <button type="submit" class="w-full bg-gray-900 hover:bg-[#1CABB0] text-white p-4 rounded-xl font-bold transition-colors text-lg">
-            {t('contact.form.submit')}
+          <!-- Submit Button -->
+          <button id="submit-btn" type="submit" class="w-full flex items-center justify-center gap-3 bg-gray-900 hover:bg-[#1CABB0] text-white p-4 rounded-xl font-bold transition-all text-lg disabled:opacity-70 disabled:cursor-not-allowed">
+            <span id="submit-text">{t('contact.form.submit')}</span>
+            <!-- Loading Spinner (Hidden by default) -->
+            <svg id="submit-spinner" class="hidden animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
           </button>
           
-          <!-- Submit Result Message -->
-          <div id="result" class="mt-4 text-center text-sm font-bold min-h-[24px]"></div>
         </form>
+
+        <!-- New Clear Notification Alert Box -->
+        <div id="notification-box" class="hidden mt-6 p-5 rounded-xl border flex items-start gap-4 transition-all duration-300">
+          <div id="notify-icon" class="flex-shrink-0 mt-0.5"></div>
+          <div>
+            <h4 id="notify-title" class="font-bold text-lg mb-1"></h4>
+            <p id="notify-desc" class="text-gray-700 text-sm leading-relaxed"></p>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -97,7 +110,7 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
 </BaseLayout>
 
 <style>
-  /* Form Validation Styles copied directly from your working project */
+  /* Form Validation Styles */
   .invalid-feedback,
   .empty-feedback {
     display: none;
@@ -113,31 +126,34 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
   
   .is-invalid,
   .was-validated :invalid {
-    border-color: #dc3545; /* Red outline for missed fields */
-  }
-  
-  #result {
-    visibility: hidden;
-    color: #dc3545; /* Default error color */
-  }
-  
-  #result.show {
-    visibility: visible;
+    border-color: #dc3545;
   }
 </style>
 
 <script is:inline>
-  // Setup the script function so it works on direct loads AND Astro View Transitions
   function setupContactForm() {
     const form = document.getElementById("form");
-    const result = document.getElementById("result");
+    const submitBtn = document.getElementById("submit-btn");
+    const submitText = document.getElementById("submit-text");
+    const submitSpinner = document.getElementById("submit-spinner");
+    const notificationBox = document.getElementById("notification-box");
+    const notifyIcon = document.getElementById("notify-icon");
+    const notifyTitle = document.getElementById("notify-title");
+    const notifyDesc = document.getElementById("notify-desc");
 
-    if (!form || !result) return;
+    if (!form) return;
 
-    // Remove old event listener if it exists (useful for Astro View Transitions)
+    // Remove old event listener if it exists (Astro View Transitions fix)
     const newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
     const updatedForm = document.getElementById("form");
+
+    // Icons for notifications
+    const iconSuccess = `<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+    const iconError = `<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+
+    // Store original button text
+    const originalBtnText = submitText.innerText;
 
     updatedForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -147,14 +163,16 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
         updatedForm.querySelectorAll(":invalid")[0].focus();
         return;
       }
+
+      // 1. UI Loading State
+      submitBtn.disabled = true;
+      submitText.innerText = "Sending...";
+      submitSpinner.classList.remove("hidden");
+      notificationBox.classList.add("hidden"); // Hide previous alerts
       
       const formData = new FormData(updatedForm);
       const object = Object.fromEntries(formData);
       const json = JSON.stringify(object);
-
-      result.textContent = 'Sending...';
-      result.style.color = "#1CABB0"; // Teal color for sending state
-      result.classList.add('show');
 
       fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -166,33 +184,50 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
       })
       .then(async (response) => {
         let json = await response.json();
+        
+        // Remove hidden to show the box
+        notificationBox.classList.remove("hidden");
+
         if (response.status == 200) {
-          result.textContent = json.message || "Message sent successfully!";
-          result.style.color = "#10B981"; // Success Green
+          // Success State
+          notificationBox.className = "mt-6 p-5 rounded-xl border bg-green-50 border-green-200 flex items-start gap-4 transition-all duration-300";
+          notifyIcon.innerHTML = iconSuccess;
+          notifyTitle.innerText = "Message Sent!";
+          notifyTitle.className = "font-bold text-lg mb-1 text-green-900";
+          notifyDesc.innerText = "Thank you for getting in touch. We will get back to you as soon as possible.";
+          
+          updatedForm.reset();
+          updatedForm.classList.remove("was-validated");
         } else {
+          // Error State
           console.log(response);
-          result.textContent = json.message || "Something went wrong!";
-          result.style.color = "#dc3545"; // Error Red
+          notificationBox.className = "mt-6 p-5 rounded-xl border bg-red-50 border-red-200 flex items-start gap-4 transition-all duration-300";
+          notifyIcon.innerHTML = iconError;
+          notifyTitle.innerText = "Oops! Something went wrong.";
+          notifyTitle.className = "font-bold text-lg mb-1 text-red-900";
+          notifyDesc.innerText = json.message || "Please try again later or contact us directly via email.";
         }
       })
       .catch((error) => {
         console.log(error);
-        result.textContent = "Something went wrong!";
-        result.style.color = "#dc3545"; // Error Red
+        notificationBox.classList.remove("hidden");
+        notificationBox.className = "mt-6 p-5 rounded-xl border bg-red-50 border-red-200 flex items-start gap-4 transition-all duration-300";
+        notifyIcon.innerHTML = iconError;
+        notifyTitle.innerText = "Connection Error";
+        notifyTitle.className = "font-bold text-lg mb-1 text-red-900";
+        notifyDesc.innerText = "Please check your internet connection and try again.";
       })
-      .then(function () {
-        updatedForm.reset();
-        updatedForm.classList.remove("was-validated");
-        setTimeout(() => {
-          result.classList.remove('show');
-        }, 5000);
+      .finally(function () {
+        // Revert button back to normal state
+        submitBtn.disabled = false;
+        submitText.innerText = originalBtnText;
+        submitSpinner.classList.add("hidden");
       });
     });
   }
 
   // Run on standard load
   document.addEventListener("DOMContentLoaded", setupContactForm);
-  
   // Run on Astro page navigation (if ViewTransitions are enabled)
   document.addEventListener("astro:page-load", setupContactForm);
 </script>
