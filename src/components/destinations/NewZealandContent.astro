@@ -20,5 +20,7 @@ function t(key: keyof typeof ui[typeof lang]) {
   currency={t('nz.page.currency')}
   imageSrc="/images/new-zealand/nz_main.jpg"
   imageAlt="Beautiful landscape in New Zealand"
+  planUrl={lang === 'nl' ? '/nl/contact/' : '/en/contact/'}
+  guideUrl={lang === 'nl' ? '/eguides/' : '/en/eguides/'}
 >
 </DestinationContent>

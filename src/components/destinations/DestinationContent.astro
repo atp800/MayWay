@@ -1,6 +1,6 @@
 ---
-// src/components/DestinationContent.astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import CTAButtons from "../ui/CTAButtons.astro";
 import { ui, defaultLang } from '../../i18n/ui';
 
 export interface Props {
@@ -11,6 +11,8 @@ export interface Props {
   currency: string;
   imageSrc: string;
   imageAlt: string;
+  planUrl: string;   
+  guideUrl: string;  
 }
 
 const { 
@@ -20,7 +22,9 @@ const {
   language, 
   currency, 
   imageSrc, 
-  imageAlt 
+  imageAlt,
+  planUrl,
+  guideUrl
 } = Astro.props;
 
 // Get current language for generic UI labels
@@ -123,5 +127,7 @@ function t(key: keyof typeof ui[typeof lang]) {
 
   <!-- This slot allows us to inject the correct Carousel at the bottom of the page -->
   <slot />
+
+  <CTAButtons planUrl={planUrl} guideUrl={guideUrl} />
 
 </BaseLayout>

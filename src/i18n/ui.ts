@@ -140,6 +140,11 @@ export const ui = {
     'destinations.btn': 'Plan your trip!',
 
 
+    // buttons
+    'btn.eguides': 'View E-Guides',
+    'btn.plan': 'Plan Your Trip',
+
+
     // destination pages global
     'labels.capital': 'Capital',
     'labels.language': 'Language',
@@ -295,6 +300,11 @@ export const ui = {
     'destinations.indo.desc': 'Ervaar tropische eilanden, eeuwenoude tempels en een rijke, warme cultuur.',
     
     'destinations.btn': 'Plan jouw reis!',
+
+
+    // buttons
+    'btn.eguides': 'Bekijk E-Gidsen',
+    'btn.plan': 'Plan jouw reis',
 
 
 
