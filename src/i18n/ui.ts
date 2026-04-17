@@ -152,6 +152,20 @@ export const ui = {
     'aus.page.language': 'English',
     'aus.page.currency': 'Australian Dollar (AUD)',
 
+    // destination pages - new zealand
+    'nz.page.title': 'New Zealand',
+    'nz.page.desc': 'New Zealand is a land of majestic fjords, lush mountains, and breathtaking natural beauty. From the iconic Milford Sound to the vibrant streets of Auckland, it offers a unique experience. Whether you are climbing the Southern Alps, surfing the coast, or exploring the local culture, New Zealand is unforgettable.',
+    'nz.page.capital': 'Wellington',
+    'nz.page.language': 'English',
+    'nz.page.currency': 'New Zealand Dollar (NZD)',
+
+    // destination pages - indonesia
+    'indonesia.page.title': 'Indonesia',
+    'indonesia.page.desc': 'Indonesia is a tropical archipelago known for its diverse culture, stunning landscapes, and rich history. From the bustling streets of Jakarta to the serene beaches of Bali, it offers an unforgettable experience. Whether you are exploring ancient temples, hiking volcanic peaks, or diving into crystal-clear waters, Indonesia is a paradise for travelers.',
+    'indonesia.page.capital': 'Jakarta',
+    'indonesia.page.language': 'Indonesian',
+    'indonesia.page.currency': 'Indonesian Rupiah (IDR)',
+
   },
   nl: {
     // homepage and menu
@@ -283,6 +297,7 @@ export const ui = {
     'destinations.btn': 'Plan jouw reis!',
 
 
+
     // destination pages global
     'labels.capital': 'Hoofdstad',
     'labels.language': 'Taal',
@@ -294,6 +309,22 @@ export const ui = {
     'aus.page.capital': 'Canberra',
     'aus.page.language': 'Engels',
     'aus.page.currency': 'Australische Dollar (AUD)',
+
+    // destination pages - new zealand
+    'nz.page.title': 'Nieuw-Zeeland',
+    'nz.page.desc': 'Nieuw-Zeeland is een land van majestueuze fjorden, weelderige bergen en adembenemende natuur. Van het iconische Milford Sound tot de levendige straatjes van Auckland, het biedt een unieke ervaring. Of je nu klimt in de Southern Alps, surft aan de kust of ontdekt de lokale cultuur, Nieuw-Zeeland is onvergetelijk.',
+    'nz.page.capital': 'Wellington',
+    'nz.page.language': 'Engels',
+    'nz.page.currency': 'Nieuw-Zeelandse Dollar (NZD)',
+
+    // destination pages - indonesia
+    'indonesia.page.title': 'Indonesië',
+    'indonesia.page.desc': 'Indonesië is een tropische archipel die bekend staat om zijn diverse cultuur, adembenemende landschappen en rijke geschiedenis. Van de bruisende straten van Jakarta tot de serene stranden van Bali, het biedt een onvergetelijke ervaring. Of je nu oude tempels verkent, vulkanische pieken beklimt of duikt in kristalhelder water, Indonesië is een paradijs voor reizigers.',
+    'indonesia.page.capital': 'Jakarta',
+    'indonesia.page.language': 'Indonesisch',
+    'indonesia.page.currency': 'Indonesische Rupiah (IDR)',
+
+
   },
 } as const;
 
