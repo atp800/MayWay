@@ -33,45 +33,166 @@ function t(key: keyof typeof ui[typeof defaultLang]) {
 
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <span class="text-[#4ED2CE] font-bold text-xs uppercase tracking-wider">E-mail</span>
-            <span class="font-medium text-gray-800">hello@maywaytravels.nl</span>
+            <span class="text-[#4ED2CE] font-bold text-md uppercase tracking-wider">E-mail</span>
+            <span class="font-medium text-gray-800 text-lg">hello@maywaytravels.nl</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="text-[#4ED2CE] font-bold text-xs uppercase tracking-wider">Instagram</span>
-            <span class="font-medium text-gray-800">@maywaytravels</span>
+            <span class="text-[#4ED2CE] font-bold text-md uppercase tracking-wider">Instagram</span>
+            <span class="font-medium text-gray-800 text-lg">@maywaytravels</span>
           </div>
         </div>
       </div>
 
       <!-- Right Side: Contact Form -->
       <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)]">
-        <form action="#" method="POST">
+        
+        <form 
+          action="https://api.web3forms.com/submit" 
+          method="POST" 
+          id="form" 
+          class="needs-validation" 
+          novalidate
+        >
+          <!-- 🚨 WEB3FORMS ACCESS KEY 🚨 -->
+          <!-- Replace value="" with the Access Key sent to your new email -->
+          <input type="hidden" name="access_key" value="2959f375-6a4f-4be5-8939-f7fdf988e6fd" />
+          
+          <!-- Web3Forms Honeypot (Spam Protection) -->
+          <input type="checkbox" class="hidden" style="display:none" name="botcheck" />
+          
+          <!-- Optional: Sets the subject of the email you receive -->
+          <input type="hidden" name="subject" value="New Contact Message from May Way Travels" />
+
           <div class="mb-6">
-            <label for="naam" class="block text-xs font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.nameLabel')}</label>
+            <label for="naam" class="block text-lg font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.nameLabel')}</label>
             <input type="text" id="naam" name="naam" placeholder={t('contact.form.namePlaceholder')} required class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-[#4ED2CE] focus:bg-white transition-colors">
           </div>
 
           <div class="mb-6">
-            <label for="email" class="block text-xs font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.emailLabel')}</label>
+            <label for="email" class="block text-lg font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.emailLabel')}</label>
             <input type="email" id="email" name="email" placeholder={t('contact.form.emailPlaceholder')} required class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-[#4ED2CE] focus:bg-white transition-colors">
           </div>
 
           <div class="mb-6">
-            <label for="onderwerp" class="block text-xs font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.subjectLabel')}</label>
+            <label for="onderwerp" class="block text-lg font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.subjectLabel')}</label>
             <input type="text" id="onderwerp" name="onderwerp" placeholder={t('contact.form.subjectPlaceholder')} class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-[#4ED2CE] focus:bg-white transition-colors">
           </div>
 
-          <div class="mb-8">
-            <label for="bericht" class="block text-xs font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.messageLabel')}</label>
+          <div class="mb-8 relative">
+            <label for="bericht" class="block text-lg font-bold uppercase tracking-wider mb-2 text-gray-900">{t('contact.form.messageLabel')}</label>
             <textarea id="bericht" name="bericht" rows="4" placeholder={t('contact.form.messagePlaceholder')} required class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-[#4ED2CE] focus:bg-white transition-colors"></textarea>
           </div>
 
           <button type="submit" class="w-full bg-gray-900 hover:bg-[#1CABB0] text-white p-4 rounded-xl font-bold transition-colors text-lg">
             {t('contact.form.submit')}
           </button>
+          
+          <!-- Submit Result Message -->
+          <div id="result" class="mt-4 text-center text-sm font-bold min-h-[24px]"></div>
         </form>
       </div>
 
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  /* Form Validation Styles copied directly from your working project */
+  .invalid-feedback,
+  .empty-feedback {
+    display: none;
+  }
+  
+  .was-validated :placeholder-shown:invalid ~ .empty-feedback {
+    display: block;
+  }
+  
+  .was-validated :not(:placeholder-shown):invalid ~ .invalid-feedback {
+    display: block;
+  }
+  
+  .is-invalid,
+  .was-validated :invalid {
+    border-color: #dc3545; /* Red outline for missed fields */
+  }
+  
+  #result {
+    visibility: hidden;
+    color: #dc3545; /* Default error color */
+  }
+  
+  #result.show {
+    visibility: visible;
+  }
+</style>
+
+<script is:inline>
+  // Setup the script function so it works on direct loads AND Astro View Transitions
+  function setupContactForm() {
+    const form = document.getElementById("form");
+    const result = document.getElementById("result");
+
+    if (!form || !result) return;
+
+    // Remove old event listener if it exists (useful for Astro View Transitions)
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+    const updatedForm = document.getElementById("form");
+
+    updatedForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      updatedForm.classList.add("was-validated");
+      
+      if (!updatedForm.checkValidity()) {
+        updatedForm.querySelectorAll(":invalid")[0].focus();
+        return;
+      }
+      
+      const formData = new FormData(updatedForm);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      result.textContent = 'Sending...';
+      result.style.color = "#1CABB0"; // Teal color for sending state
+      result.classList.add('show');
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      })
+      .then(async (response) => {
+        let json = await response.json();
+        if (response.status == 200) {
+          result.textContent = json.message || "Message sent successfully!";
+          result.style.color = "#10B981"; // Success Green
+        } else {
+          console.log(response);
+          result.textContent = json.message || "Something went wrong!";
+          result.style.color = "#dc3545"; // Error Red
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        result.textContent = "Something went wrong!";
+        result.style.color = "#dc3545"; // Error Red
+      })
+      .then(function () {
+        updatedForm.reset();
+        updatedForm.classList.remove("was-validated");
+        setTimeout(() => {
+          result.classList.remove('show');
+        }, 5000);
+      });
+    });
+  }
+
+  // Run on standard load
+  document.addEventListener("DOMContentLoaded", setupContactForm);
+  
+  // Run on Astro page navigation (if ViewTransitions are enabled)
+  document.addEventListener("astro:page-load", setupContactForm);
+</script>
