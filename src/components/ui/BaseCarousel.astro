@@ -1,0 +1,207 @@
+---
+// src/components/BaseCarousel.astro
+import { useTranslations } from '../../i18n/ui';
+
+export interface Slide {
+  title: { nl: string; en: string };
+  image: string;
+  link: { nl: string; en: string };
+}
+
+export interface Props {
+  slides: Slide[];
+  subtitle?: string;
+  title?: string;
+  desc?: string;
+}
+
+const { slides, subtitle, title, desc } = Astro.props;
+
+type SupportedLang = 'nl' | 'en';
+const currentPath = Astro.url.pathname;
+const lang = (Astro.currentLocale || (currentPath.startsWith('/en') ? 'en' : 'nl')) as SupportedLang;
+const t = useTranslations(lang);
+
+const headerSubtitle = subtitle || t('carousel.subtitle');
+const headerTitle = title || t('carousel.title');
+const headerDesc = desc || t('carousel.desc');
+---
+
+<section class="py-24 px-6 bg-white" data-carousel-wrapper>
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-12">
+      <h2 class="max-w-xl">
+        <span class="block font-bold text-3xl md:text-5xl text-gray-800 font-neucha">{headerSubtitle}</span>
+        <span class="block text-3xl md:text-4xl text-[#4ED2CE] mt-1 leading-tight">{headerTitle}</span>
+      </h2>
+      <p class="lg:max-w-md lg:text-right text-lg text-gray-600 leading-relaxed lg:pt-2">
+        {headerDesc}
+      </p>
+    </div>
+
+    <!-- Carousel Track -->
+    <div data-carousel-track class="flex gap-6 overflow-x-auto snap-x snap-proximity pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden smooth-scroll">
+      {slides.map((slide) => (
+        <article class="relative flex-shrink-0 w-[min(85vw,20rem)] md:w-[280px] lg:w-[300px] snap-start rounded-3xl overflow-hidden shadow-lg h-[420px]">
+          <img src={slide.image} alt={slide.title[lang]} class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+          <div class="absolute inset-0 flex flex-col justify-end">
+            <div class="px-5 pb-5 text-center">
+              <p class="text-[11px] uppercase tracking-[0.2em] text-white/90 mb-2">{t('carousel.badge')}</p>
+              
+              <h3 class="text-2xl font-bold text-white mb-4">{slide.title[lang]}</h3>
+              
+              <a class="inline-flex items-center gap-2 rounded-full border-2 border-white px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/15" href={slide.link[lang]}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                {t('carousel.btn')}
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center justify-center gap-6 mt-8">
+      <button 
+        data-carousel-prev 
+        type="button" 
+        disabled 
+        class="p-2 rounded-full text-[#4ED2CE] hover:bg-[#E6F6F6] disabled:opacity-30 disabled:hover:bg-transparent transition-colors" 
+        aria-label="Vorige"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"></path></svg>
+      </button>
+      
+      <div class="flex gap-2" data-carousel-dots-container>
+        {slides.map((_, index) => (
+          <button 
+            type="button" 
+            class={`carousel-dot h-2.5 rounded-full transition-all ${index === 0 ? 'w-8 bg-[#4ED2CE]' : 'w-2.5 bg-gray-300 hover:bg-gray-400'}`}
+            aria-label={`Ga naar slide ${index + 1}`}
+            data-index={index}
+            data-carousel-dot
+          ></button>
+        ))}
+      </div>
+
+      <button 
+        data-carousel-next 
+        type="button" 
+        class="p-2 rounded-full text-[#4ED2CE] hover:bg-[#E6F6F6] disabled:opacity-30 disabled:hover:bg-transparent transition-colors" 
+        aria-label="Volgende"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script>
+  function initCarousels() {
+    const carousels = document.querySelectorAll('[data-carousel-wrapper]');
+
+    carousels.forEach((carouselWrapper) => {
+      const track = carouselWrapper.querySelector('[data-carousel-track]');
+      const prevBtn = carouselWrapper.querySelector('[data-carousel-prev]') as HTMLButtonElement;
+      const nextBtn = carouselWrapper.querySelector('[data-carousel-next]') as HTMLButtonElement;
+      const dotsContainer = carouselWrapper.querySelector('[data-carousel-dots-container]') as HTMLElement;
+      const dots = carouselWrapper.querySelectorAll('[data-carousel-dot]');
+
+      if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+      const gap = 24; 
+
+      const updateControls = () => {
+        if (!track.firstElementChild) return;
+        
+        const scrollLeft = track.scrollLeft;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        const itemWidth = (track.firstElementChild as HTMLElement).offsetWidth + gap;
+        
+        // 1. Calculate how many dots are actually functionally reachable
+        const visibleDotCount = maxScroll > 0 ? Math.ceil(maxScroll / itemWidth) + 1 : 1;
+
+        // Hide the whole dot container if everything already fits on screen
+        dotsContainer.style.display = visibleDotCount <= 1 ? 'none' : 'flex';
+
+        // Update Arrow Buttons
+        prevBtn.disabled = scrollLeft <= 0;
+        nextBtn.disabled = scrollLeft >= maxScroll - 1; 
+
+        // 2. Determine active dot index
+        let activeIndex = Math.round(scrollLeft / itemWidth);
+        
+        // If we've reached the absolute end of the scroll container, ensure the very last dot lights up
+        if (scrollLeft >= maxScroll - 1) {
+          activeIndex = visibleDotCount - 1;
+        }
+
+        // 3. Update Dots visually
+        dots.forEach((dotNode, index) => {
+          const dot = dotNode as HTMLElement;
+          
+          // Hide dots that represent unreachable scroll positions (dead dots)
+          if (index >= visibleDotCount) {
+            dot.style.display = 'none';
+          } else {
+            dot.style.display = 'block';
+            
+            if (index === activeIndex) {
+              dot.classList.replace('w-2.5', 'w-8');
+              dot.classList.replace('bg-gray-300', 'bg-[#4ED2CE]');
+              dot.classList.remove('hover:bg-gray-400');
+            } else {
+              dot.classList.replace('w-8', 'w-2.5');
+              dot.classList.replace('bg-[#4ED2CE]', 'bg-gray-300');
+              dot.classList.add('hover:bg-gray-400');
+            }
+          }
+        });
+      };
+
+      const scrollToIndex = (index: number) => {
+        if (!track.firstElementChild) return;
+        const itemWidth = (track.firstElementChild as HTMLElement).offsetWidth + gap;
+        track.scrollTo({ left: index * itemWidth, behavior: 'smooth' });
+      };
+
+      prevBtn.addEventListener('click', () => {
+        if (!track.firstElementChild) return;
+        const itemWidth = (track.firstElementChild as HTMLElement).offsetWidth + gap;
+        track.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (!track.firstElementChild) return;
+        const itemWidth = (track.firstElementChild as HTMLElement).offsetWidth + gap;
+        track.scrollBy({ left: itemWidth, behavior: 'smooth' });
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => scrollToIndex(index));
+      });
+
+      track.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls);
+
+      // Initial check
+      updateControls();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCarousels);
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousels);
+  } else {
+    initCarousels();
+  }
+</script>

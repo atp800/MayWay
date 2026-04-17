@@ -1,6 +1,6 @@
 ---
-// src/components/AustraliaCarousel.astro
-import BaseCarousel, { type Slide } from '../ui/BaseCarousel.astro';
+// src/components/HomeCarousel.astro
+import BaseCarousel, { type Slide } from './BaseCarousel.astro';
 
 const slides: Slide[] = [
   { 
@@ -32,14 +32,18 @@ const slides: Slide[] = [
     title: { nl: "West-Australië", en: "Western Australia" }, 
     image: "/images/pexels-5775290.jpeg", 
     link: { nl: "/e-gidsen", en: "/en/e-guides" } 
+  },
+  { 
+    title: { nl: "Nieuw-Zeeland", en: "New Zealand" }, 
+    image: "/images/pexels-4784435.jpeg", 
+    link: { nl: "/e-gidsen", en: "/en/e-guides" } 
+  },
+  { 
+    title: { nl: "Bali & Indonesië", en: "Bali & Indonesia" }, 
+    image: "/images/pexels-3601456.jpeg", 
+    link: { nl: "/e-gidsen", en: "/en/e-guides" } 
   }
 ];
 ---
-
-<!-- 
-Note: Because we added optional text props to BaseCarousel, 
-you could override the default text here if you wanted to! 
-Example: <BaseCarousel slides={slides} title="Ontdek Australië" />
--->
 
 <BaseCarousel slides={slides} />
